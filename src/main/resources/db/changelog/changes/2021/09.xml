@@ -1,0 +1,85 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="2021-09.1" author="Kononov A.A.">
+        <createTable tableName="user">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints
+                        primaryKey="true"
+                        primaryKeyName="user_pk"
+                />
+            </column>
+            <column name="name" type="varchar(255)"/>
+            <column name="first_name" type="varchar(255)"/>
+            <column name="middle_name" type="varchar(255)"/>
+            <column name="last_name" type="varchar(255)"/>
+            <column name="phone" type="varchar(255)"/>
+        </createTable>
+
+        <createTable tableName="cold_water_meter">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints
+                        primaryKey="true"
+                        primaryKeyName="cold_water_meter_pk"
+                />
+            </column>
+            <column name="user_id" type="bigint" >
+                <constraints
+                        nullable="false"
+                        referencedTableName="user"
+                        referencedColumnNames="id"
+                        foreignKeyName="cold_water_meter_to_user_id_fk"
+                />
+            </column>
+            <column name="value" type="double"/>
+            <column name="date_of_measurement" type="timestamp"/>
+        </createTable>
+
+        <createTable tableName="hot_water_meter">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints
+                        primaryKey="true"
+                        primaryKeyName="hot_water_meter_pk"
+                />
+            </column>
+            <column name="user_id" type="bigint" >
+                <constraints
+                        nullable="false"
+                        referencedTableName="user"
+                        referencedColumnNames="id"
+                        foreignKeyName="hot_water_meter_to_user_id_fk"
+                />
+            </column>
+
+            <column name="value" type="double"/>
+            <column name="date_of_measurement" type="timestamp"/>
+        </createTable>
+
+        <createTable tableName="gas_meter">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints
+                        primaryKey="true"
+                        primaryKeyName="gas_meter_pk"
+                />
+            </column>
+            <column name="user_id" type="bigint" >
+                <constraints
+                        nullable="false"
+                        referencedTableName="user"
+                        referencedColumnNames="id"
+                        foreignKeyName="gas_meter_to_user_id_fk"
+                />
+            </column>
+            <column name="value" type="double"/>
+            <column name="date_of_measurement" type="timestamp"/>
+        </createTable>
+
+        <createIndex tableName="user" unique="true"
+                     indexName="user_phone_index">
+            <column name="phone"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>

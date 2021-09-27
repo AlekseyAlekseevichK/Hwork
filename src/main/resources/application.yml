@@ -1,0 +1,11 @@
+server:
+  port: 8080
+
+spring:
+  liquibase:
+    change-log: classpath:db/changelog/liqubase-changelog.xml
+
+  datasource:
+    url: jdbc:hsqldb:hsql://localhost:9001/monitoring
+    username:
+    password:
