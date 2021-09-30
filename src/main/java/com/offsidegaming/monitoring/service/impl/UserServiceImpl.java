@@ -4,6 +4,7 @@ import com.offsidegaming.monitoring.model.User;
 import com.offsidegaming.monitoring.repository.UserRepository;
 import com.offsidegaming.monitoring.service.UserService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -17,16 +18,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public User saveUser(User user) {
         return userRepository.save(user);
     }
 
     @Override
+    @Transactional
     public Optional<User> findUser(Long id) {
         return userRepository.findById(id);
     }
 
     @Override
+    @Transactional
     public void deleteUserById(Long id) {
         deleteUserById(id);
     }

@@ -7,5 +7,6 @@ import java.time.LocalDate;
 @Data
 public class ColdWaterMeterDto {
     private Double value;
+
     private LocalDate dateOfMeasurement;
 }
